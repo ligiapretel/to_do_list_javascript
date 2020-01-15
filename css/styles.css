@@ -1,0 +1,7 @@
+.tarefa{
+    border: 1px solid #929292;
+    border-radius: 5px;
+    padding: 30px;
+    display: flex;
+    width: 400px;
+}
