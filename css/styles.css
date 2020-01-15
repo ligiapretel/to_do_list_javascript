@@ -5,3 +5,29 @@
     display: flex;
     width: 400px;
 }
+
+footer{
+    position: fixed;
+    bottom: 0;
+    height: 10vh;
+    width: 100%;
+}
+
+#novaTarefa{
+    width: 80%;
+    border: none;
+    border-radius: 5px;
+    margin-left: 50px;
+}
+
+#add{
+    color: #fff;
+    background-color: #17a2b8;
+    border:none;
+}
+
+#add:hover{
+    color: #17a2b8;
+    background-color: #fff;
+    border:none;
+}
