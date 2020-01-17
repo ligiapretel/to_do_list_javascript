@@ -25,35 +25,39 @@ buttonAdd.onclick = function(){
     let valorDigitado = inputAdd.value;
     listaTarefas.push(valorDigitado);
 
-    // alert('Estou funcionando');
-    // Criando uma div que armazenará uma nova tarefa ao clicar no botão add
-    let tarefa = document.createElement('div');
-    tarefa.setAttribute('class','tarefa m-1');
+    // Como passei um parâmetro na função gerar tarefa, quando chamo ela aqui preciso passar o parâmetro novamente
+    gerarTarefa(valorDigitado);
 
-    let titulo = document.createElement('div');
-    titulo.setAttribute('class','col-md-8');
-    titulo.textContent = valorDigitado;
+    // Para não ficar redundante, comento os códigos abaixo relacionados a criação da tarefa e troco pela função gerar tarefa
+            // // alert('Estou funcionando');
+            // // Criando uma div que armazenará uma nova tarefa ao clicar no botão add
+            // let tarefa = document.createElement('div');
+            // tarefa.setAttribute('class','tarefa m-1');
 
-    let checkDiv = document.createElement('div');
-    checkDiv.setAttribute('class','col-md-2');
+            // let titulo = document.createElement('div');
+            // titulo.setAttribute('class','col-md-8');
+            // titulo.textContent = valorDigitado;
 
-    let checkButton = document.createElement('button');
-    checkButton.setAttribute('class','btn');
-    // Para adicionar mais classes, basta separar por espaço ('class','btn btn-primary')
-    // innerHTML - para o js renderizar o unicode como html, tenho que usar o innerHtml aqui, senão ele vai renderizar como texto puro
-    checkButton.innerHTML = "&#9989;";
-    // Se tivesse mais this.getAttributeNodeNS, era só declarar embaixo. Ex:
-    // checkButton.setAttribute('src','img/check.png');
+            // let checkDiv = document.createElement('div');
+            // checkDiv.setAttribute('class','col-md-2');
 
-    // Colocando o elemento checkButton dentro da checkDiv
-    checkDiv.appendChild(checkButton);
+            // let checkButton = document.createElement('button');
+            // checkButton.setAttribute('class','btn');
+            // // Para adicionar mais classes, basta separar por espaço ('class','btn btn-primary')
+            // // innerHTML - para o js renderizar o unicode como html, tenho que usar o innerHtml aqui, senão ele vai renderizar como texto puro
+            // checkButton.innerHTML = "&#9989;";
+            // // Se tivesse mais this.getAttributeNodeNS, era só declarar embaixo. Ex:
+            // // checkButton.setAttribute('src','img/check.png');
 
-    // Colocando os elementos titulo e checkDiv dentro do elemento tarefa
-    tarefa.appendChild(titulo);
-    tarefa.appendChild(checkDiv);
+            // // Colocando o elemento checkButton dentro da checkDiv
+            // checkDiv.appendChild(checkButton);
 
-    // Colocando o elemento tarefa dentro do elemento board
-    board.appendChild(tarefa);
+            // // Colocando os elementos titulo e checkDiv dentro do elemento tarefa
+            // tarefa.appendChild(titulo);
+            // tarefa.appendChild(checkDiv);
+
+            // // Colocando o elemento tarefa dentro do elemento board
+            // board.appendChild(tarefa);
 
     // Atualizando o localstorage com o novo item que salvei
     localStorage.setItem('listaTarefas',JSON.stringify(listaTarefas));
@@ -91,6 +95,17 @@ function gerarTarefa(valorDigitado){
     // Colocando o elemento checkButton dentro da checkDiv
     checkDiv.appendChild(checkButton);
 
+    // Para saber qual botão foi clicado, adicionamos um evento com event.target. Coloco essa função no gerar tarefa para que eu já saiba qual botão exatamente foi clicado (se eu criasse essa função fora, teria que identificar antes qual era o botão clicado, e aqui eu já não preciso)
+    // event.target - retorna o elemento que foi clicado
+    checkButton.onclick = function(event){
+        // Como já selecionei a div tarefa lá em createImageBitmap, posso removê-la direto aqui
+        tarefa.remove();
+        // Uma forma de selecionar a div tarefa é com event.target.parentNode
+        // let divPai = event.target.parentNode.parentNode;
+        // divPai.remove();
+        // console.log(event.target.parentNode.parentNode);
+    }
+
     // Colocando os elementos titulo e checkDiv dentro do elemento tarefa
     tarefa.appendChild(titulo);
     tarefa.appendChild(checkDiv);
@@ -98,3 +113,9 @@ function gerarTarefa(valorDigitado){
     // Colocando o elemento tarefa dentro do elemento board
     board.appendChild(tarefa);
 }
+
+// // Criando função para apagar uma tarefa 
+// function deletarTarefa(tarefa){
+//     let tarefa = document.getElementsByClassName('tarefa');
+//     tarefa.removeChild(list.childNodes[0]); 
+// }
